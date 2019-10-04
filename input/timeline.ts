@@ -1,6 +1,11 @@
 import { DeviceType, TimelineContentTypeSisyfos } from 'timeline-state-resolver'
 import { TSRInput } from '..'
 
+let OFFSET_VAL = 1400
+let timelineOffset = (time: number, offset: number): number => {
+	return Date.now() + time + offset * OFFSET_VAL
+}
+
 export const input: TSRInput = {
 	timeline: [
 		{
@@ -14,13 +19,12 @@ export const input: TSRInput = {
 				type: TimelineContentTypeSisyfos.SISYFOS,
 				isPgm: 0
 			},
-			priority: 0,
-			isLookahead: true
+			priority: 0
 		},
 		{
 			id: 'f1pgm',
 			enable: {
-				start: Date.now() + 1000,
+				start: timelineOffset(1000, 0),
 				duration: 1000,
 				repeating: 3000
 			},
@@ -37,7 +41,7 @@ export const input: TSRInput = {
 		{
 			id: 'f1vo',
 			enable: {
-				start: Date.now() + 2000,
+				start: timelineOffset(2000, 0),
 				duration: 1000,
 				repeating: 3000
 			},
@@ -53,20 +57,55 @@ export const input: TSRInput = {
 		{
 			id: 'f1pst',
 			enable: {
-				start: Date.now() + 3000,
-				duration: 1000,
-				repeating: 3000
+				start: timelineOffset(500, 0),
+				duration: 500,
+				repeating: 1500
 			},
-			layer: 'fader1',
+			layer: 'fader1_lookahead',
 			content: {
 				deviceType: DeviceType.SISYFOS,
 				type: TimelineContentTypeSisyfos.SISYFOS,
 				isPgm: 1
 			},
 			priority: 1,
-			isLookahead: true
-
+			isLookahead: true,
+			lookaheadForLayer: 'fader1'
 		},
+		{
+			id: 'f1pstVo',
+			enable: {
+				start: timelineOffset(1000, 0),
+				duration: 500,
+				repeating: 1500
+			},
+			layer: 'fader1_lookahead',
+			content: {
+				deviceType: DeviceType.SISYFOS,
+				type: TimelineContentTypeSisyfos.SISYFOS,
+				isPgm: 2
+			},
+			priority: 1,
+			isLookahead: true,
+			lookaheadForLayer: 'fader1'
+		},
+		{
+			id: 'f1pstOff',
+			enable: {
+				start: timelineOffset(0, 0),
+				duration: 500,
+				repeating: 1500
+			},
+			layer: 'fader1_lookahead',
+			content: {
+				deviceType: DeviceType.SISYFOS,
+				type: TimelineContentTypeSisyfos.SISYFOS,
+				isPgm: 0
+			},
+			priority: 1,
+			isLookahead: true,
+			lookaheadForLayer: 'fader1'
+		},
+
 		{
 			id: 'baseline2',
 			enable: {
@@ -78,13 +117,12 @@ export const input: TSRInput = {
 				type: TimelineContentTypeSisyfos.SISYFOS,
 				isPgm: 0
 			},
-			priority: 0,
-			isLookahead: true
+			priority: 0
 		},
 		{
 			id: 'f2pgm',
 			enable: {
-				start: Date.now() + 2000,
+				start: timelineOffset(1000, 1),
 				duration: 1000,
 				repeating: 3000
 			},
@@ -101,7 +139,7 @@ export const input: TSRInput = {
 		{
 			id: 'f2vo',
 			enable: {
-				start: Date.now() + 3000,
+				start: timelineOffset(2000, 1),
 				duration: 1000,
 				repeating: 3000
 			},
@@ -117,20 +155,55 @@ export const input: TSRInput = {
 		{
 			id: 'f2pst',
 			enable: {
-				start: Date.now() + 4000,
-				duration: 1000,
-				repeating: 3000
+				start: timelineOffset(400, 1),
+				duration: 400,
+				repeating: 1200
 			},
-			layer: 'fader2',
+			layer: 'fader2_lookahead',
 			content: {
 				deviceType: DeviceType.SISYFOS,
 				type: TimelineContentTypeSisyfos.SISYFOS,
 				isPgm: 1
 			},
 			priority: 1,
-			isLookahead: true
-
+			isLookahead: true,
+			lookaheadForLayer: 'fader2'
 		},
+		{
+			id: 'f2pstVo',
+			enable: {
+				start: timelineOffset(800, 1),
+				duration: 400,
+				repeating: 1200
+			},
+			layer: 'fader2_lookahead',
+			content: {
+				deviceType: DeviceType.SISYFOS,
+				type: TimelineContentTypeSisyfos.SISYFOS,
+				isPgm: 2
+			},
+			priority: 1,
+			isLookahead: true,
+			lookaheadForLayer: 'fader2'
+		},
+		{
+			id: 'f2pstOff',
+			enable: {
+				start: timelineOffset(0, 1),
+				duration: 400,
+				repeating: 1200
+			},
+			layer: 'fader2_lookahead',
+			content: {
+				deviceType: DeviceType.SISYFOS,
+				type: TimelineContentTypeSisyfos.SISYFOS,
+				isPgm: 0
+			},
+			priority: 1,
+			isLookahead: true,
+			lookaheadForLayer: 'fader2'
+		},
+
 		{
 			id: 'baseline3',
 			enable: {
@@ -142,13 +215,12 @@ export const input: TSRInput = {
 				type: TimelineContentTypeSisyfos.SISYFOS,
 				isPgm: 0
 			},
-			priority: 0,
-			isLookahead: true
+			priority: 0
 		},
 		{
 			id: 'f3pgm',
 			enable: {
-				start: Date.now() + 3000,
+				start: timelineOffset(1000, 2),
 				duration: 1000,
 				repeating: 3000
 			},
@@ -165,7 +237,7 @@ export const input: TSRInput = {
 		{
 			id: 'f3vo',
 			enable: {
-				start: Date.now() + 4000,
+				start: timelineOffset(2000, 2),
 				duration: 1000,
 				repeating: 3000
 			},
@@ -181,19 +253,53 @@ export const input: TSRInput = {
 		{
 			id: 'f3pst',
 			enable: {
-				start: Date.now() + 5000,
-				duration: 1000,
-				repeating: 3000
+				start: timelineOffset(400, 2),
+				duration: 400,
+				repeating: 1200
 			},
-			layer: 'fader3',
+			layer: 'fader3_lookahead',
 			content: {
 				deviceType: DeviceType.SISYFOS,
 				type: TimelineContentTypeSisyfos.SISYFOS,
 				isPgm: 1
 			},
 			priority: 1,
-			isLookahead: true
-
+			isLookahead: true,
+			lookaheadForLayer: 'fader3'
 		},
+		{
+			id: 'f3pstVo',
+			enable: {
+				start: timelineOffset(800, 2),
+				duration: 400,
+				repeating: 1200
+			},
+			layer: 'fader3_lookahead',
+			content: {
+				deviceType: DeviceType.SISYFOS,
+				type: TimelineContentTypeSisyfos.SISYFOS,
+				isPgm: 2
+			},
+			priority: 1,
+			isLookahead: true,
+			lookaheadForLayer: 'fader3'
+		},
+		{
+			id: 'f3pstOff',
+			enable: {
+				start: timelineOffset(0, 2),
+				duration: 400,
+				repeating: 1200
+			},
+			layer: 'fader3_lookahead',
+			content: {
+				deviceType: DeviceType.SISYFOS,
+				type: TimelineContentTypeSisyfos.SISYFOS,
+				isPgm: 0
+			},
+			priority: 1,
+			isLookahead: true,
+			lookaheadForLayer: 'fader3'
+		}
 	]
 }

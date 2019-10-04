@@ -1,86 +1,29 @@
 import { DeviceType } from 'timeline-state-resolver'
 
+let mapping = (ch) => {
+	return {
+		device: DeviceType.SISYFOS,
+		deviceId: 'sisyfos0',
+		channel: ch
+	}
+}
 export const input = {
 	mappings: {
-		'fader1': {
-			device: DeviceType.SISYFOS,
-			deviceId: 'sisyfos0',
-			channel: 0
-		},
-		'fader2': {
-			device: DeviceType.SISYFOS,
-			deviceId: 'sisyfos0',
-			channel: 1
-		},
-		'fader3': {
-			device: DeviceType.SISYFOS,
-			deviceId: 'sisyfos0',
-			channel: 2
-		},
-		'fader4': {
-			device: DeviceType.SISYFOS,
-			deviceId: 'sisyfos0',
-			channel: 3
-		},
-		'fader5': {
-			device: DeviceType.SISYFOS,
-			deviceId: 'sisyfos0',
-			channel: 4
-		},
-		'fader6': {
-			device: DeviceType.SISYFOS,
-			deviceId: 'sisyfos0',
-			channel: 5
-		},
-		'fader7': {
-			device: DeviceType.SISYFOS,
-			deviceId: 'sisyfos0',
-			channel: 6
-		},
-		'fader8': {
-			device: DeviceType.SISYFOS,
-			deviceId: 'sisyfos0',
-			channel: 7
-		},
-		'fader9': {
-			device: DeviceType.SISYFOS,
-			deviceId: 'sisyfos0',
-			channel: 8
-		},
-		'fader10': {
-			device: DeviceType.SISYFOS,
-			deviceId: 'sisyfos0',
-			channel: 9
-		},
-		'fader11': {
-			device: DeviceType.SISYFOS,
-			deviceId: 'sisyfos0',
-			channel: 10
-		},
-		'fader12': {
-			device: DeviceType.SISYFOS,
-			deviceId: 'sisyfos0',
-			channel: 11
-		},
-		'fader13': {
-			device: DeviceType.SISYFOS,
-			deviceId: 'sisyfos0',
-			channel: 12
-		},
-		'fader14': {
-			device: DeviceType.SISYFOS,
-			deviceId: 'sisyfos0',
-			channel: 13
-		},
-		'fader15': {
-			device: DeviceType.SISYFOS,
-			deviceId: 'sisyfos0',
-			channel: 14
-		},
-		'fader16': {
-			device: DeviceType.SISYFOS,
-			deviceId: 'sisyfos0',
-			channel: 15
-		}
+		'fader1': mapping(0),
+		'fader1_lookahead': mapping(0),
+		'fader2': mapping(1),
+		'fader2_lookahead': mapping(1),
+		'fader3': mapping(2),
+		'fader3_lookahead': mapping(2),
+		'fader4': mapping(3),
+		'fader4_lookahead': mapping(3),
+		'fader5': mapping(4),
+		'fader5_lookahead': mapping(4),
+		'fader6': mapping(5),
+		'fader6_lookahead': mapping(5),
+		'fader7': mapping(6),
+		'fader7_lookahead': mapping(6),
+		'fader8': mapping(7),
+		'fader8_lookahead': mapping(7)
 	}
 }
