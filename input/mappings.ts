@@ -7,23 +7,38 @@ let mapping = (ch) => {
 		channel: ch
 	}
 }
-export const input = {
-	mappings: {
-		'fader1': mapping(0),
-		'fader1_lookahead': mapping(0),
-		'fader2': mapping(1),
-		'fader2_lookahead': mapping(1),
-		'fader3': mapping(2),
-		'fader3_lookahead': mapping(2),
-		'fader4': mapping(3),
-		'fader4_lookahead': mapping(3),
-		'fader5': mapping(4),
-		'fader5_lookahead': mapping(4),
-		'fader6': mapping(5),
-		'fader6_lookahead': mapping(5),
-		'fader7': mapping(6),
-		'fader7_lookahead': mapping(6),
-		'fader8': mapping(7),
-		'fader8_lookahead': mapping(7)
+
+
+const fader = (channel: number) => {
+	return {
+		['fader' + String(channel)]: mapping(channel - 1),
+		['fader' + String(channel) + '_lookahead']: mapping(channel - 1)
 	}
 }
+
+
+const mappings = () => {
+	let maps = {
+		...fader(1),
+		...fader(2),
+		...fader(3),
+		...fader(4),
+		...fader(5),
+		...fader(6),
+		...fader(7),
+		...fader(8),
+		...fader(9),
+		...fader(10),
+		...fader(11),
+		...fader(12),
+		...fader(13),
+		...fader(14),
+		...fader(15),
+		...fader(16)
+	}
+	return {
+		mappings: maps
+	}
+}
+
+export const input = mappings()

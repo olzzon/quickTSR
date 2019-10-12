@@ -1,19 +1,19 @@
-import { DeviceType, TimelineContentTypeSisyfos } from 'timeline-state-resolver'
+import { DeviceType, TimelineContentTypeSisyfos, TSRTimeline } from 'timeline-state-resolver'
 import { TSRInput } from '..'
 
-let OFFSET_VAL = 1400
+let OFFSET_VAL = 4000
 let timelineOffset = (time: number, offset: number): number => {
 	return Date.now() + time + offset * OFFSET_VAL
 }
 
-export const input: TSRInput = {
-	timeline: [
+const fader = (channel: number): TSRTimeline => {
+	return [
 		{
-			id: 'baseline1',
+			id: 'baseline' + String(channel),
 			enable: {
 				while: '1'
 			},
-			layer: 'fader1',
+			layer: 'fader' + String(channel),
 			content: {
 				deviceType: DeviceType.SISYFOS,
 				type: TimelineContentTypeSisyfos.SISYFOS,
@@ -22,13 +22,13 @@ export const input: TSRInput = {
 			priority: 0
 		},
 		{
-			id: 'f1pgm',
+			id: 'f' + String(channel) + 'pgm',
 			enable: {
-				start: timelineOffset(1000, 0),
+				start: timelineOffset(1000, channel),
 				duration: 1000,
 				repeating: 3000
 			},
-			layer: 'fader1',
+			layer: 'fader' + String(channel),
 			content: {
 				deviceType: DeviceType.SISYFOS,
 				type: TimelineContentTypeSisyfos.SISYFOS,
@@ -39,13 +39,13 @@ export const input: TSRInput = {
 
 		},
 		{
-			id: 'f1vo',
+			id: 'f' + String(channel) + 'vo',
 			enable: {
-				start: timelineOffset(2000, 0),
+				start: timelineOffset(2000, channel),
 				duration: 1000,
 				repeating: 3000
 			},
-			layer: 'fader1',
+			layer: 'fader' + String(channel),
 			content: {
 				deviceType: DeviceType.SISYFOS,
 				type: TimelineContentTypeSisyfos.SISYFOS,
@@ -55,13 +55,13 @@ export const input: TSRInput = {
 			isLookahead: false
 		},
 		{
-			id: 'f1pst',
+			id: 'f' + String(channel) + 'pst',
 			enable: {
-				start: timelineOffset(500, 0),
-				duration: 500,
-				repeating: 1500
+				start: timelineOffset(500, channel),
+				duration: 1500,
+				repeating: 4500
 			},
-			layer: 'fader1_lookahead',
+			layer: 'fader' + String(channel) + '_lookahead',
 			content: {
 				deviceType: DeviceType.SISYFOS,
 				type: TimelineContentTypeSisyfos.SISYFOS,
@@ -69,16 +69,16 @@ export const input: TSRInput = {
 			},
 			priority: 1,
 			isLookahead: true,
-			lookaheadForLayer: 'fader1'
+			lookaheadForLayer: 'fader' + String(channel)
 		},
 		{
-			id: 'f1pstVo',
+			id: 'f' + String(channel) + 'pstVo',
 			enable: {
-				start: timelineOffset(1000, 0),
-				duration: 500,
-				repeating: 1500
+				start: timelineOffset(1000, channel),
+				duration: 1500,
+				repeating: 4500
 			},
-			layer: 'fader1_lookahead',
+			layer: 'fader' + String(channel) + '_lookahead',
 			content: {
 				deviceType: DeviceType.SISYFOS,
 				type: TimelineContentTypeSisyfos.SISYFOS,
@@ -86,16 +86,16 @@ export const input: TSRInput = {
 			},
 			priority: 1,
 			isLookahead: true,
-			lookaheadForLayer: 'fader1'
+			lookaheadForLayer: 'fader' + String(channel)
 		},
 		{
-			id: 'f1pstOff',
+			id: 'f' + String(channel) + 'pstOff',
 			enable: {
-				start: timelineOffset(0, 0),
-				duration: 500,
-				repeating: 1500
+				start: timelineOffset(0, channel),
+				duration: 1500,
+				repeating: 4500
 			},
-			layer: 'fader1_lookahead',
+			layer: 'fader' + String(channel) + '_lookahead',
 			content: {
 				deviceType: DeviceType.SISYFOS,
 				type: TimelineContentTypeSisyfos.SISYFOS,
@@ -103,8 +103,36 @@ export const input: TSRInput = {
 			},
 			priority: 1,
 			isLookahead: true,
-			lookaheadForLayer: 'fader1'
-		},
+			lookaheadForLayer: 'fader' + String(channel)
+		}]
+}
+
+const timeline = (): TSRTimeline => {
+	let elements: TSRTimeline = []
+	elements = [ ...elements, ...fader(1)]
+	elements = [...elements, ...fader(2)]
+	elements = [...elements, ...fader(3)]
+	elements = [...elements, ...fader(4)]
+	elements = [...elements, ...fader(5)]
+	elements = [...elements, ...fader(6)]
+	elements = [...elements, ...fader(7)]
+	elements = [...elements, ...fader(8)]
+	elements = [...elements, ...fader(9)]
+	elements = [...elements, ...fader(10)]
+	elements = [...elements, ...fader(11)]
+	elements = [...elements, ...fader(12)]
+	elements = [...elements, ...fader(13)]
+	elements = [...elements, ...fader(14)]
+	elements = [...elements, ...fader(15)]
+	elements = [...elements, ...fader(16)]
+	return elements
+}
+
+export const input: TSRInput = {
+	timeline: timeline()
+}
+/*	timeline:
+		fader(0),
 
 		{
 			id: 'baseline2',
@@ -302,4 +330,4 @@ export const input: TSRInput = {
 			lookaheadForLayer: 'fader3'
 		}
 	]
-}
+}*/
