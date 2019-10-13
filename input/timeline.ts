@@ -18,7 +18,8 @@ const fader = (channel: number): TSRTimeline => {
 				deviceType: DeviceType.SISYFOS,
 				type: TimelineContentTypeSisyfos.SISYFOS,
 				isPgm: 0,
-				faderLevel: 0.75
+				faderLevel: 0.75,
+				label: 'yes ' + String(channel)
 			},
 			priority: 0
 		},
@@ -26,14 +27,15 @@ const fader = (channel: number): TSRTimeline => {
 			id: 'f' + String(channel) + 'pgm',
 			enable: {
 				start: timelineOffset(1000, channel),
-				duration: 1000,
-				repeating: 4000
+				duration: 2000,
+				repeating: 8000
 			},
 			layer: 'fader' + String(channel),
 			content: {
 				deviceType: DeviceType.SISYFOS,
 				type: TimelineContentTypeSisyfos.SISYFOS,
-				isPgm: 1
+				isPgm: 1,
+				label: 'fine ' + String(channel)
 			},
 			priority: 1,
 			isLookahead: false
@@ -42,9 +44,9 @@ const fader = (channel: number): TSRTimeline => {
 		{
 			id: 'f' + String(channel) + 'vo',
 			enable: {
-				start: timelineOffset(2000, channel),
-				duration: 1000,
-				repeating: 4000
+				start: timelineOffset(3000, channel),
+				duration: 2000,
+				repeating: 8000
 			},
 			layer: 'fader' + String(channel),
 			content: {
@@ -58,9 +60,9 @@ const fader = (channel: number): TSRTimeline => {
 		{
 			id: 'f' + String(channel) + 'pgmLow',
 			enable: {
-				start: timelineOffset(3000, channel),
-				duration: 1000,
-				repeating: 4000
+				start: timelineOffset(5000, channel),
+				duration: 2000,
+				repeating: 8000
 			},
 			layer: 'fader' + String(channel),
 			content: {
@@ -76,9 +78,9 @@ const fader = (channel: number): TSRTimeline => {
 		{
 			id: 'f' + String(channel) + 'pst',
 			enable: {
-				start: timelineOffset(500, channel),
-				duration: 1500,
-				repeating: 4500
+				start: timelineOffset(1500, channel),
+				duration: 3000,
+				repeating: 7000
 			},
 			layer: 'fader' + String(channel) + '_lookahead',
 			content: {
@@ -93,9 +95,9 @@ const fader = (channel: number): TSRTimeline => {
 		{
 			id: 'f' + String(channel) + 'pstVo',
 			enable: {
-				start: timelineOffset(1000, channel),
-				duration: 1500,
-				repeating: 4500
+				start: timelineOffset(2000, channel),
+				duration: 3000,
+				repeating: 7000
 			},
 			layer: 'fader' + String(channel) + '_lookahead',
 			content: {
@@ -111,8 +113,8 @@ const fader = (channel: number): TSRTimeline => {
 			id: 'f' + String(channel) + 'pstOff',
 			enable: {
 				start: timelineOffset(0, channel),
-				duration: 1500,
-				repeating: 4500
+				duration: 3000,
+				repeating: 7000
 			},
 			layer: 'fader' + String(channel) + '_lookahead',
 			content: {
@@ -129,7 +131,7 @@ const fader = (channel: number): TSRTimeline => {
 const timeline = (): TSRTimeline => {
 	let elements: TSRTimeline = []
 	elements = [...elements, ...fader(1)]
-	elements = [...elements, 		{
+	elements = [...elements, {
 		id: 'fader1',
 		enable: {
 			start: timelineOffset(7000, 1),
