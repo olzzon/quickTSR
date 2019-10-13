@@ -1,9 +1,9 @@
 import { DeviceType, TimelineContentTypeSisyfos, TSRTimeline } from 'timeline-state-resolver'
 import { TSRInput } from '..'
 
-let OFFSET_VAL = 4000
+let OFFSET_VAL = 4300
 let timelineOffset = (time: number, offset: number): number => {
-	return Date.now() + time + offset * OFFSET_VAL
+	return Date.now() + time + (offset - 1) * OFFSET_VAL
 }
 
 const fader = (channel: number): TSRTimeline => {
@@ -17,7 +17,8 @@ const fader = (channel: number): TSRTimeline => {
 			content: {
 				deviceType: DeviceType.SISYFOS,
 				type: TimelineContentTypeSisyfos.SISYFOS,
-				isPgm: 0
+				isPgm: 0,
+				faderLevel: 0.75
 			},
 			priority: 0
 		},
@@ -26,7 +27,7 @@ const fader = (channel: number): TSRTimeline => {
 			enable: {
 				start: timelineOffset(1000, channel),
 				duration: 1000,
-				repeating: 3000
+				repeating: 4000
 			},
 			layer: 'fader' + String(channel),
 			content: {
@@ -43,7 +44,7 @@ const fader = (channel: number): TSRTimeline => {
 			enable: {
 				start: timelineOffset(2000, channel),
 				duration: 1000,
-				repeating: 3000
+				repeating: 4000
 			},
 			layer: 'fader' + String(channel),
 			content: {
@@ -53,6 +54,24 @@ const fader = (channel: number): TSRTimeline => {
 			},
 			priority: 1,
 			isLookahead: false
+		},
+		{
+			id: 'f' + String(channel) + 'pgmLow',
+			enable: {
+				start: timelineOffset(3000, channel),
+				duration: 1000,
+				repeating: 4000
+			},
+			layer: 'fader' + String(channel),
+			content: {
+				deviceType: DeviceType.SISYFOS,
+				type: TimelineContentTypeSisyfos.SISYFOS,
+				isPgm: 1,
+				faderLevel: 0.4
+			},
+			priority: 1,
+			isLookahead: false
+
 		},
 		{
 			id: 'f' + String(channel) + 'pst',
@@ -109,7 +128,22 @@ const fader = (channel: number): TSRTimeline => {
 
 const timeline = (): TSRTimeline => {
 	let elements: TSRTimeline = []
-	elements = [ ...elements, ...fader(1)]
+	elements = [...elements, ...fader(1)]
+	elements = [...elements, 		{
+		id: 'fader1',
+		enable: {
+			start: timelineOffset(7000, 1),
+			duration: 7000,
+			repeating: 14000
+		},
+		layer: 'fader1',
+		content: {
+			deviceType: DeviceType.SISYFOS,
+			type: TimelineContentTypeSisyfos.SISYFOS,
+			fadeToBlack: false
+		},
+		priority: 1
+	}]
 	elements = [...elements, ...fader(2)]
 	elements = [...elements, ...fader(3)]
 	elements = [...elements, ...fader(4)]
@@ -125,6 +159,7 @@ const timeline = (): TSRTimeline => {
 	elements = [...elements, ...fader(14)]
 	elements = [...elements, ...fader(15)]
 	elements = [...elements, ...fader(16)]
+
 	return elements
 }
 

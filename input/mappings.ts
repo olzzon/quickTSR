@@ -19,6 +19,11 @@ const fader = (channel: number) => {
 
 const mappings = () => {
 	let maps = {
+		'faderAll' : {
+			device: DeviceType.SISYFOS,
+			deviceId: 'sisyfos0',
+			channel: 4
+		},
 		...fader(1),
 		...fader(2),
 		...fader(3),
