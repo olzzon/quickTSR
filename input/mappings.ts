@@ -1,4 +1,6 @@
 import { DeviceType } from 'timeline-state-resolver'
+import { TSRInput } from '../src'
+import { literal } from 'timeline-state-resolver/dist/devices/device'
 
 let mapping = (ch) => {
 	return {
@@ -7,7 +9,6 @@ let mapping = (ch) => {
 		channel: ch
 	}
 }
-
 
 const fader = (channel: number) => {
 	return {
@@ -46,4 +47,4 @@ const mappings = () => {
 	}
 }
 
-export const input = mappings()
+export const input: TSRInput = mappings()

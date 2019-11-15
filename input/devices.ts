@@ -1,4 +1,4 @@
-import { TSRInput } from '..'
+import { TSRInput } from '../src'
 import { DeviceType } from 'timeline-state-resolver'
 
 export const input: TSRInput = {

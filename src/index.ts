@@ -3,7 +3,7 @@ import * as chokidar from 'chokidar'
 import * as fs from 'fs'
 import * as _ from 'underscore'
 import * as path from 'path'
-import { DeviceOptions, Mappings, TSRTimeline } from 'timeline-state-resolver'
+import { DeviceOptionsAny, Mappings, TSRTimeline } from 'timeline-state-resolver'
 import { TSRHandler } from './tsrHandler'
 const clone = require('fast-clone')
 // import { TSRHandler } from './tsrHandler'
@@ -48,31 +48,35 @@ function reloadInput () {
 
 		const requirePath = '../' + filePath.replace(/\\/g, '/')
 
-		if (requirePath.match(/[\/\\]_/)) {
-			// ignore and folders files that begin with "_"
-			return
-		}
-		if (filePath.match(/\.ts$/)) {
+		try {
+			if (requirePath.match(/[\/\\]_/)) {
+				// ignore and folders files that begin with "_"
+				return
+			}
+			if (filePath.match(/\.ts$/)) {
 
-			delete require.cache[require.resolve(requirePath)]
+				delete require.cache[require.resolve(requirePath)]
 
-			const fileContents = require(requirePath)
+				const fileContents = require(requirePath)
 
-			const fileInput = fileContents.input || {}
+				const fileInput = fileContents.input || {}
 
-			_.each(fileInput.devices, (device: any, deviceId) => {
-				newInput.devices[deviceId] = device
-			})
-			_.each(fileInput.mappings, (mapping: any, mappingId) => {
-				newInput.mappings[mappingId] = mapping
-			})
-			_.each(fileInput.settings, (setting: any, settingId) => {
-				newInput.settings[settingId] = setting
-			})
+				_.each(fileInput.devices, (device: any, deviceId) => {
+					newInput.devices[deviceId] = device
+				})
+				_.each(fileInput.mappings, (mapping: any, mappingId) => {
+					newInput.mappings[mappingId] = mapping
+				})
+				_.each(fileInput.settings, (setting: any, settingId) => {
+					newInput.settings[settingId] = setting
+				})
 
-			_.each(fileInput.timeline, (obj: any) => {
-				newInput.timeline.push(obj)
-			})
+				_.each(fileInput.timeline, (obj: any) => {
+					newInput.timeline.push(obj)
+				})
+			}
+		} catch (e) {
+			console.error(`Failed to load file: ${requirePath}`, e)
 		}
 	})
 	// react to changes:
@@ -146,7 +150,7 @@ export type TSRInput = Optional<Input>
 export interface Input {
 	settings: TSRSettings,
 	devices: {
-		[deviceId: string]: DeviceOptions
+		[deviceId: string]: DeviceOptionsAny
 	},
 	mappings: Mappings,
 	timeline: TSRTimeline
