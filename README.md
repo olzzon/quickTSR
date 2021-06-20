@@ -1,12 +1,7 @@
-# Quick-TSR
-An application for quick and easy usage of TSR (https://github.com/nrkno/tv-automation-state-timeline-resolver).
+# Quick-TSR-Sisyfos-test
+This is based on Nytamin´s QuickTSR, and is used for testing Sofie-Sisyfos-Hardwaremixer end-to-end
 
-## Requirements
-* Install [yarn](https://yarnpkg.com/en/docs/install)
-* Install ts-node:
-  * `yarn global add ts-node`
-  * `yarn global add typescript`
-  
+It needs 2 running Sisyfos instances, and IP addresses are set in CONSTANTS.ts
 
 ## Usage
 * Clone the repo
