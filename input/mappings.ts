@@ -2,85 +2,85 @@ import { DeviceType } from 'timeline-state-resolver'
 
 export const input = {
 	mappings: {
-		'fader1': {
+		'sisyfos0Fader1': {
 			device: DeviceType.SISYFOS,
 			deviceId: 'sisyfos0',
 			channel: 0
 		},
-		'fader2': {
+		'sisyfos0Fader2': {
 			device: DeviceType.SISYFOS,
 			deviceId: 'sisyfos0',
 			channel: 1
 		},
-		'fader3': {
+		'sisyfos0Fader3': {
 			device: DeviceType.SISYFOS,
 			deviceId: 'sisyfos0',
 			channel: 2
 		},
-		'fader4': {
+		'sisyfos0Fader4': {
 			device: DeviceType.SISYFOS,
 			deviceId: 'sisyfos0',
 			channel: 3
 		},
-		'fader5': {
+		'sisyfos0Fader5': {
 			device: DeviceType.SISYFOS,
 			deviceId: 'sisyfos0',
 			channel: 4
 		},
-		'fader6': {
+		'sisyfos0Fader6': {
 			device: DeviceType.SISYFOS,
 			deviceId: 'sisyfos0',
 			channel: 5
 		},
-		'fader7': {
+		'sisyfos0Fader7': {
 			device: DeviceType.SISYFOS,
 			deviceId: 'sisyfos0',
 			channel: 6
 		},
-		'fader8': {
+		'sisyfos0Fader8': {
 			device: DeviceType.SISYFOS,
 			deviceId: 'sisyfos0',
 			channel: 7
 		},
-		'fader9': {
+		'sisyfos0Fader9': {
 			device: DeviceType.SISYFOS,
 			deviceId: 'sisyfos0',
 			channel: 8
 		},
-		'fader10': {
+		'sisyfos0Fader10': {
 			device: DeviceType.SISYFOS,
 			deviceId: 'sisyfos0',
 			channel: 9
 		},
-		'fader11': {
+		'sisyfos0Fader11': {
 			device: DeviceType.SISYFOS,
 			deviceId: 'sisyfos0',
 			channel: 10
 		},
-		'fader12': {
+		'sisyfos0Fader12': {
 			device: DeviceType.SISYFOS,
 			deviceId: 'sisyfos0',
 			channel: 11
 		},
-		'fader13': {
+		'sisyfos0Fader13': {
 			device: DeviceType.SISYFOS,
 			deviceId: 'sisyfos0',
 			channel: 12
 		},
-		'fader14': {
+		'sisyfos0Fader14': {
 			device: DeviceType.SISYFOS,
 			deviceId: 'sisyfos0',
 			channel: 13
 		},
-		'fader15': {
+		'sisyfos0Fader15': {
 			device: DeviceType.SISYFOS,
 			deviceId: 'sisyfos0',
 			channel: 14
 		},
-		'fader16': {
+		'sisyfos0Fader16': {
 			device: DeviceType.SISYFOS,
 			deviceId: 'sisyfos0',
 			channel: 15
-		}
+		},
 	}
 }
