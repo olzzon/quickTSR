@@ -170,8 +170,8 @@ export interface TSRSettings {
 const compareState = () => {
 	let currentState0: any
 	let currentState1: any
-	const sisyfos0State = new SisyfosState(SISYFOS0_ADDRESS, 5255)
-	const sisyfos1State = new SisyfosState(SISYFOS1_ADDRESS, 5255)
+	const sisyfos0State = new SisyfosState(SISYFOS0_ADDRESS, 5256)
+	const sisyfos1State = new SisyfosState(SISYFOS1_ADDRESS, 5257)
 	
 	sisyfos0State.getSisyfosState()
 	.then((state0: any) => {

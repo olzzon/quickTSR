@@ -2,17 +2,19 @@ const osc = require("osc");
 
 export class SisyfosState {
 	ip: string;
-	port: number;
-	constructor(ip: string, port: number) {
+	localPort: number;
+	constructor(ip: string, localPort: number) {
 		this.ip = ip;
-		this.port = port;
+		this.localPort = localPort;
 	}
 
 	public getSisyfosState = (): Promise<any> => {
 		return new Promise((resolve: any, reject: any) => {
 			const oscConnection = new osc.UDPPort({
+				localAddress: '0.0.0.0',
+				localPort: this.localPort,
 				remoteAddress: this.ip,
-				remotePort: this.port,
+				remotePort: 5255,
 			});
 
 			oscConnection
