@@ -26,7 +26,7 @@ export class SisyfosState {
 					if (message.address === "/state/full") {
 						console.log("Received state");
 						oscConnection.close();
-						resolve(message.args[0]);
+						resolve(JSON.parse(message.args[0]));
 					} else {
 						console.log("Unknown OSC message");
 					}

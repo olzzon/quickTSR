@@ -168,31 +168,34 @@ export interface TSRSettings {
 }
 
 const compareState = () => {
-	let currentState0: any
-	let currentState1: any
-	const sisyfos0State = new SisyfosState(SISYFOS0_ADDRESS, 5256)
-	const sisyfos1State = new SisyfosState(SISYFOS1_ADDRESS, 5257)
-	
-	sisyfos0State.getSisyfosState()
-	.then((state0: any) => {
-		currentState0 = state0
-		return sisyfos1State.getSisyfosState()
-	})
-	.then((state1) => {
-		currentState1 = state1
-		console.log('Comparison of state :', currentState0 === currentState1)
-	})
-	.catch((error) => {
-		console.log('ERROR GETTING STATE :', error)
-	})
-}
+	let currentState0: any;
+	const sisyfos0State = new SisyfosState(SISYFOS0_ADDRESS, 5256);
+	const sisyfos1State = new SisyfosState(SISYFOS1_ADDRESS, 5257);
+
+	sisyfos0State
+		.getSisyfosState()
+		.then((state0: any) => {
+			currentState0 = state0;
+			return sisyfos1State.getSisyfosState();
+		})
+		.then((state1: any) => {
+			let stateEqual = true;
+			currentState0.channel.forEach((channel, index: number) => {
+				if (channel.pgmOn !== state1.channel[index].pgmOn) {
+					stateEqual = false;
+				}
+			});
+
+			console.log("Comparison of state :", stateEqual);
+		})
+		.catch((error) => {
+			console.log("ERROR GETTING STATE :", error);
+		});
+};
 // ------------
 reloadInput();
 console.log("Listening to changes in /input...");
 
-
-
 setInterval(() => {
-	compareState()
+	compareState();
 }, 3000);
-
