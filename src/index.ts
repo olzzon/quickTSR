@@ -5,7 +5,7 @@ import * as _ from "underscore";
 import * as path from "path";
 import { DeviceOptions, Mappings, TSRTimeline } from "timeline-state-resolver";
 import { TSRHandler } from "./tsrHandler";
-import { getSisyfosState } from "./stateFromOsc";
+import { SisyfosState } from "./stateFromOsc";
 import { SISYFOS0_ADDRESS, SISYFOS1_ADDRESS } from "./CONSTANTS";
 const clone = require("fast-clone");
 // import { TSRHandler } from './tsrHandler'
@@ -170,11 +170,13 @@ export interface TSRSettings {
 const compareState = () => {
 	let currentState0: any
 	let currentState1: any
+	const sisyfos0State = new SisyfosState(SISYFOS0_ADDRESS, 5255)
+	const sisyfos1State = new SisyfosState(SISYFOS1_ADDRESS, 5255)
 	
-	getSisyfosState(SISYFOS0_ADDRESS, 5255)
+	sisyfos0State.getSisyfosState()
 	.then((state0: any) => {
 		currentState0 = state0
-		return getSisyfosState(SISYFOS1_ADDRESS, 5255)
+		return sisyfos1State.getSisyfosState()
 	})
 	.then((state1) => {
 		currentState1 = state1
