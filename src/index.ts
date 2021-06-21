@@ -181,7 +181,7 @@ const compareState = () => {
 		.then((state1: any) => {
 			let stateEqual = true;
 			currentState0.channel.forEach((channel, index: number) => {
-				if (channel.pgmOn !== state1.channel[index].pgmOn) {
+				if (channel.pgmOn !== state1.channel[index].pgmOn && state1.channel[index].faderLevel !== 0) {
 					stateEqual = false;
 				}
 			});
