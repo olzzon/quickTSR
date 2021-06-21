@@ -106,7 +106,7 @@
   "dependencies": {
     "chokidar": "^3.5.2",
     "fast-clone": "^1.5.13",
-    "timeline-state-resolver": "^5.8.0",
+    "timeline-state-resolver": "3.10.0",
     "tslib": "^2.3.0",
     "underscore": "^1.13.1"
   }
